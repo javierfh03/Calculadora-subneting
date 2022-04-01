@@ -55,7 +55,7 @@ public class InformacionIP extends javax.swing.JFrame {
         setResizable(false);
 
         jLabelTitulo.setFont(new java.awt.Font("Lato Heavy", 0, 22)); // NOI18N
-        jLabelTitulo.setText("Información de la ip: " + this.direccion);
+        jLabelTitulo.setText("Información de la IP: " + this.direccion);
 
         jLabelDirRed.setText("Dirección de red: " + dirRed);
 
@@ -67,7 +67,7 @@ public class InformacionIP extends javax.swing.JFrame {
 
         jLabelHostMax.setText("Host máximo: " + hostMax);
 
-        jLabelPosicion.setText("Posición de la ip: " + pos);
+        jLabelPosicion.setText("Posición de la IP: " + pos);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

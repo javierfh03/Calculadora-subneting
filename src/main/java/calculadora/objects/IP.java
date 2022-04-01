@@ -9,7 +9,7 @@ import calculadora.lib.Convertir;
  * 
  * @author javier
  */
-public class IP {
+public final class IP {
     private int primerOcteto, segundoOcteto, tercerOcteto, cuartoOcteto, mascara;
 
     /**
@@ -20,6 +20,7 @@ public class IP {
      * @param tercerOcteto Tercer octeto de la ip.
      * @param cuartoOcteto Cuarto octeto de la ip.
      * @param mascara Máscara de la ip.
+     * @throws java.lang.Exception Si la ip no es válida se lanza una excepción.
      */
     public IP(int primerOcteto, int segundoOcteto, int tercerOcteto, int cuartoOcteto, int mascara) throws Exception {
         try {
@@ -103,7 +104,7 @@ public class IP {
      * 
      * @return Un objeto IP que contiene la dirección de red.
      */
-    public IP sacarDireccionDeSubred() throws Exception{
+    public IP sacarDireccionDeSubred(){
         StringBuilder aux = new StringBuilder("");
         StringBuilder ipBinario = new StringBuilder(CalculosIP.ipBinario(this));
         
@@ -115,7 +116,11 @@ public class IP {
         // Añadimos los 0 reemplazando los bits de host.
         ipBinario.replace(mascara, 32, aux.toString());
         
-        return CalculosIP.ipDecimal(ipBinario.toString(), getMascara());
+        try {
+            return CalculosIP.ipDecimal(ipBinario.toString(), getMascara());
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     /**
@@ -123,7 +128,7 @@ public class IP {
      * 
      * @return Un objeto IP que contiene la dirección de broadcast.
      */
-    public IP sacarDireccionDeBroadcast() throws Exception{
+    public IP sacarDireccionDeBroadcast(){
         StringBuilder aux = new StringBuilder("");
         StringBuilder ipBinario = new StringBuilder(CalculosIP.ipBinario(this));
         
@@ -135,7 +140,11 @@ public class IP {
         // Añadimos los 1 reemplazando los bits de host.
         ipBinario.replace(mascara, 32, aux.toString());
         
-        return CalculosIP.ipDecimal(ipBinario.toString(), getMascara());
+        try {
+            return CalculosIP.ipDecimal(ipBinario.toString(), getMascara());
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     /**
@@ -143,7 +152,7 @@ public class IP {
      * 
      * @return El número de la posición que se encuentra.
      */
-    public int posicionIp() throws Exception{
+    public int posicionIp(){
         String estaIp = CalculosIP.ipBinario(this);
         int estaIpNum = Convertir.binarioDecimal(estaIp.substring(getMascara(), 32));
         
@@ -165,6 +174,7 @@ public class IP {
      * debe tener una estructura como la siguiente: X.X.X.X/X
      * 
      * @param ipStr La cadena que se quiere convertir a una IP.
+     * @throws java.lang.Exception Si la ip no es válida se lanza una excepción.
      */
     public void setIp(String ipStr) throws Exception{
         int con = 0;
@@ -206,11 +216,11 @@ public class IP {
      * 
      * @return Una cadena con toda la información.
      */
-    public String info() throws Exception{
+    public String info(){
         int cantHost = CalculosIP.cantidadDeHost(this);
         StringBuilder resultado = new StringBuilder();
         
-        resultado.append("Cálculo ip ").append(this).append("\n");
+        resultado.append("Cálculo IP ").append(this).append("\n");
         resultado.append("--------------------------------------").append("\n");
         resultado.append("Dirección de red: ");
         resultado.append(getMascara() > 31 ? "No hay dirección de red" : sacarDireccionDeSubred()).append("\n");
@@ -221,7 +231,7 @@ public class IP {
         resultado.append(getMascara() > 30 ? "No hay host mínimo" : CalculosIP.buscarIp(1, this)).append("\n");
         resultado.append("Host máximo: ");
         resultado.append(getMascara() > 30 ? "No hay host máximo" : CalculosIP.buscarIp(cantHost, this)).append("\n");
-        resultado.append("Posición de la ip: ");
+        resultado.append("Posición de la IP: ");
         resultado.append(posicionIp() < 0 ? "Posición no válida" : posicionIp()).append("\n");
         resultado.append("--------------------------------------");
         

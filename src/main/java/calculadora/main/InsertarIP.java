@@ -9,10 +9,7 @@ import javax.swing.JOptionPane;
  * @author javier
  */
 public class InsertarIP extends javax.swing.JFrame {
-
-    /**
-     * Creates new form FormCalculadora
-     */
+    
     public InsertarIP() {
         initComponents();
     }
@@ -94,13 +91,17 @@ public class InsertarIP extends javax.swing.JFrame {
             try {
                 dirIP = new IP();
 
-                dirIP.setIp(dir);
-                ven = new InformacionIP(dirIP);
-                
-                this.setVisible(false);
-                ven.setVisible(true);
+                if (!dir.matches("[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}/[0-9]{1,2}")){
+                    JOptionPane.showMessageDialog(null, "La dirección IP debe tener la siguiente estructura: X.X.X.X/X", "Error", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    dirIP.setIp(dir);
+                    ven = new InformacionIP(dirIP);
+
+                    this.setVisible(false);
+                    ven.setVisible(true);
+                }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "La dirección IP debe tener la siguiente estructura: X.X.X.X/X", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "La dirección IP no es válida", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }else{
             JOptionPane.showMessageDialog(null, "Inserte una dirección IP", "Error", JOptionPane.ERROR_MESSAGE);

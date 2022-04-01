@@ -17,7 +17,7 @@ public class CalculosIP {
      * @param ip La ip de la que se quieren determinar cuantos host tiene su subred.
      * @return Un entero con la cantidad de host.
      */
-    public static int cantidadDeHost(IP ip) throws Exception{
+    public static int cantidadDeHost(IP ip){
         String primera, ultima;
         int primeraNum, ultimaNum;
         
@@ -44,7 +44,7 @@ public class CalculosIP {
      * @param ip La ip de la subred en la que se buscará la doreción.
      * @return Un objeto ip en el que estará almacenada la ip buscada.
      */
-    public static IP buscarIp(int posicion, IP ip) throws Exception{
+    public static IP buscarIp(int posicion, IP ip){
         String red = ipBinario(ip.sacarDireccionDeSubred());
         String hostPos;
         StringBuilder aux = new StringBuilder(""); 
@@ -66,7 +66,11 @@ public class CalculosIP {
         // Sustituimos los bits de host de la dirección de red por los host de la ip buscada.
         ipPos.replace(ip.getMascara(), 32, aux.toString() + hostPos);
         
-        return ipDecimal(ipPos.toString(), ip.getMascara());
+        try {
+            return ipDecimal(ipPos.toString(), ip.getMascara());
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     /**
@@ -89,6 +93,7 @@ public class CalculosIP {
      * @param ipBin La dirección ip en binario.
      * @param mascara La máscara de la dirección ip en decimal.
      * @return La dirección ip en decimal.
+     * @throws java.lang.Exception Si la ip no es válida se lanza una excepción.
      */
     public static IP ipDecimal(String ipBin, int mascara) throws Exception{
         IP ip;
