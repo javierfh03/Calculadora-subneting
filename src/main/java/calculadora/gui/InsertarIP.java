@@ -1,4 +1,5 @@
-package calculadora.main;
+package calculadora.gui;
+import calculadora.gui.InformacionIP;
 import calculadora.objects.IP;
 import javax.swing.JOptionPane;
 

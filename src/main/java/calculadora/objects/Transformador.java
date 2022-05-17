@@ -1,4 +1,4 @@
-package calculadora.lib;
+package calculadora.objects;
 
 /**
  * Esta clase contiene funciones que realizan cálculos para cambiar la base
@@ -6,7 +6,7 @@ package calculadora.lib;
  * 
  * @author javier
  */
-public class Convertir {
+public class Transformador {
     
     /**
      * Esta función combierte un número entero en binario.

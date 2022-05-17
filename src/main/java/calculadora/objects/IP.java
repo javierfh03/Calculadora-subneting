@@ -1,11 +1,8 @@
 package calculadora.objects;
 
-import calculadora.lib.CalculosIP;
-import calculadora.lib.Convertir;
-
 /**
  * Esta clase contiene una dirección IP, consta de sus 4 octetos y una máscara de
- * red expecificada en bits. Cuenta con funciones para el manejo de la ip.
+ * red expecificada en bits. Cuenta con funciones para el manejo de la IP.
  * 
  * @author javier
  */
@@ -15,12 +12,12 @@ public final class IP {
     /**
      * Constructor de la calse IP.
      * 
-     * @param primerOcteto Primer octeto de la ip.
-     * @param segundoOcteto Segundo octeto de la ip.
-     * @param tercerOcteto Tercer octeto de la ip.
-     * @param cuartoOcteto Cuarto octeto de la ip.
-     * @param mascara Máscara de la ip.
-     * @throws java.lang.Exception Si la ip no es válida se lanza una excepción.
+     * @param primerOcteto Primer octeto de la IP.
+     * @param segundoOcteto Segundo octeto de la IP.
+     * @param tercerOcteto Tercer octeto de la IP.
+     * @param cuartoOcteto Cuarto octeto de la IP.
+     * @param mascara Máscara de la IP.
+     * @throws java.lang.Exception Si la IP no es válida se lanza una excepción.
      */
     public IP(int primerOcteto, int segundoOcteto, int tercerOcteto, int cuartoOcteto, int mascara) throws Exception {
         try {
@@ -100,13 +97,13 @@ public final class IP {
     }
     
     /**
-     * Este método se encarga de sacar la dirección de subred de la dirección ip.
+     * Este método se encarga de sacar la dirección de subred de la dirección IP.
      * 
      * @return Un objeto IP que contiene la dirección de red.
      */
     public IP sacarDireccionDeSubred(){
         StringBuilder aux = new StringBuilder("");
-        StringBuilder ipBinario = new StringBuilder(CalculosIP.ipBinario(this));
+        StringBuilder ipBinario = new StringBuilder(new CalculosIP(this).ipBinario());
         
         // Sacamos todos los 0 que necesitemos.
         for (int i = mascara; i < 32; i++) {
@@ -124,13 +121,13 @@ public final class IP {
     }
     
     /**
-     * Este método se encarga de sacar la dirección de broadcast de la dirección ip.
+     * Este método se encarga de sacar la dirección de broadcast de la dirección IP.
      * 
      * @return Un objeto IP que contiene la dirección de broadcast.
      */
     public IP sacarDireccionDeBroadcast(){
         StringBuilder aux = new StringBuilder("");
-        StringBuilder ipBinario = new StringBuilder(CalculosIP.ipBinario(this));
+        StringBuilder ipBinario = new StringBuilder(new CalculosIP(this).ipBinario());
         
         // Sacamos todos los 1 que necesitemos.
         for (int i = mascara; i < 32; i++) {
@@ -148,13 +145,13 @@ public final class IP {
     }
     
     /**
-     * Este método determina la posición de la ip, en la subred a la que pertenece.
+     * Este método determina la posición de la IP, en la subred a la que pertenece.
      * 
      * @return El número de la posición que se encuentra.
      */
     public int posicionIp(){
-        String estaIp = CalculosIP.ipBinario(this);
-        int estaIpNum = Convertir.binarioDecimal(estaIp.substring(getMascara(), 32));
+        String estaIp = new CalculosIP(this).ipBinario();
+        int estaIpNum = Transformador.binarioDecimal(estaIp.substring(getMascara(), 32));
         
         // Los casos con máscara mayor a 30 son especiales.
         if (getMascara() > 30){
@@ -170,11 +167,11 @@ public final class IP {
     }
     
     /**
-     * Esta función establece una dirección ip con  una cadena, la cadena
+     * Esta función establece una dirección IP con  una cadena, la cadena
      * debe tener una estructura como la siguiente: X.X.X.X/X
      * 
      * @param ipStr La cadena que se quiere convertir a una IP.
-     * @throws java.lang.Exception Si la ip no es válida se lanza una excepción.
+     * @throws java.lang.Exception Si la IP no es válida se lanza una excepción.
      */
     public void setIp(String ipStr) throws Exception{
         int con = 0;
@@ -212,12 +209,13 @@ public final class IP {
     
     /**
      * Esta función muestra de una forma detallada la información de la
-     * dirección ip.
+     * dirección IP.
      * 
      * @return Una cadena con toda la información.
      */
     public String info(){
-        int cantHost = CalculosIP.cantidadDeHost(this);
+        CalculosIP cal = new CalculosIP(this);
+        int cantHost = cal.cantidadDeHost();
         StringBuilder resultado = new StringBuilder();
         
         resultado.append("Cálculo IP ").append(this).append("\n");
@@ -228,9 +226,9 @@ public final class IP {
         resultado.append(getMascara() > 31 ? "No hay dirección de broadcast" : sacarDireccionDeBroadcast()).append("\n");
         resultado.append("Cantidad de host válidos: ").append(cantHost).append("\n");
         resultado.append("Host mínimo: ");
-        resultado.append(getMascara() > 30 ? "No hay host mínimo" : CalculosIP.buscarIp(1, this)).append("\n");
+        resultado.append(getMascara() > 30 ? "No hay host mínimo" : cal.buscarIp(1)).append("\n");
         resultado.append("Host máximo: ");
-        resultado.append(getMascara() > 30 ? "No hay host máximo" : CalculosIP.buscarIp(cantHost, this)).append("\n");
+        resultado.append(getMascara() > 30 ? "No hay host máximo" : cal.buscarIp(cantHost)).append("\n");
         resultado.append("Posición de la IP: ");
         resultado.append(posicionIp() < 0 ? "Posición no válida" : posicionIp()).append("\n");
         resultado.append("--------------------------------------");

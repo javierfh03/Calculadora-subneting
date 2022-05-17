@@ -1,6 +1,6 @@
-package calculadora.main;
+package calculadora.gui;
 
-import calculadora.lib.CalculosIP;
+import calculadora.objects.CalculosIP;
 import calculadora.objects.IP;
 import javax.swing.JOptionPane;
 
@@ -84,14 +84,15 @@ public class BuscarIP extends javax.swing.JDialog {
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         int posicion;
+        CalculosIP cal = new CalculosIP(direccion);
         
         try {
             posicion = Integer.parseInt(jTextFieldPos.getText());
             
-            if (posicion < 1 || posicion > CalculosIP.cantidadDeHost(direccion)){
+            if (posicion < 1 || posicion > cal.cantidadDeHost()){
                 JOptionPane.showMessageDialog(null, "Posición inválida", "Error", JOptionPane.ERROR_MESSAGE);
             }else{
-                JOptionPane.showMessageDialog(null, "La ip de la posición " + posicion + " es " + CalculosIP.buscarIp(posicion, direccion), "Busqueda", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "La ip de la posición " + posicion + " es " + cal.buscarIp(posicion), "Busqueda", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Pon un número", "Error", JOptionPane.ERROR_MESSAGE);

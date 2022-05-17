@@ -1,6 +1,7 @@
-package calculadora.main;
+package calculadora.gui;
 
-import calculadora.lib.CalculosIP;
+import calculadora.gui.BuscarIP;
+import calculadora.objects.CalculosIP;
 import calculadora.objects.IP;
 import javax.swing.JOptionPane;
 
@@ -21,13 +22,14 @@ public class InformacionIP extends javax.swing.JFrame {
      */
     public InformacionIP(IP direccion) {
         this.direccion = direccion;
+        CalculosIP cal = new CalculosIP(direccion);
         
         try {
-            cantHost = CalculosIP.cantidadDeHost(this.direccion);
+            cantHost = cal.cantidadDeHost();
             dirRed = direccion.getMascara() > 31 ? "No hay dirección de red" : direccion.sacarDireccionDeSubred().toString();
             dirBro = direccion.getMascara() > 31 ? "No hay dirección de broadcast" : direccion.sacarDireccionDeBroadcast().toString();
-            hostMin = direccion.getMascara() > 30 ? "No hay host mínimo" : CalculosIP.buscarIp(1, direccion).toString();
-            hostMax = direccion.getMascara() > 30 ? "No hay host máximo" : CalculosIP.buscarIp(cantHost, direccion).toString();
+            hostMin = direccion.getMascara() > 30 ? "No hay host mínimo" : cal.buscarIp(1).toString();
+            hostMax = direccion.getMascara() > 30 ? "No hay host máximo" : cal.buscarIp(cantHost).toString();
             pos = direccion.posicionIp() < 0 ? "Posición no válida" : direccion.posicionIp() + "";
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se pudo realizar la consulta", "Error", JOptionPane.ERROR_MESSAGE);

@@ -1,6 +1,5 @@
 package calculadora.objects;
 
-import calculadora.objects.IP;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.Assertions;

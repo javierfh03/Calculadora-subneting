@@ -1,5 +1,7 @@
 package calculadora.main;
 
+import calculadora.gui.InsertarIP;
+
 /**
  * Este archivo ejecuta el programa.
  * 
