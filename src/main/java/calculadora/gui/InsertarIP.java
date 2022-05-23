@@ -102,7 +102,8 @@ public class InsertarIP extends javax.swing.JFrame {
                     ven.setVisible(true);
                 }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "La dirección IP no es válida", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "La dirección IP no es válida ", "Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
             }
         }else{
             JOptionPane.showMessageDialog(null, "Inserte una dirección IP", "Error", JOptionPane.ERROR_MESSAGE);

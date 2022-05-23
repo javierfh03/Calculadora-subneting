@@ -1,8 +1,12 @@
 package calculadora.gui;
 
-import calculadora.gui.BuscarIP;
 import calculadora.objects.CalculosIP;
 import calculadora.objects.IP;
+import java.awt.HeadlessException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,6 +55,10 @@ public class InformacionIP extends javax.swing.JFrame {
         jLabelPosicion = new javax.swing.JLabel();
         jButtonVolver = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jGuardar = new javax.swing.JButton();
+        jAnterior = new javax.swing.JButton();
+        jSiguiente = new javax.swing.JButton();
+        jClase = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculadora de subneting");
@@ -78,62 +86,108 @@ public class InformacionIP extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Buscar");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buscar.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guardar.png"))); // NOI18N
+        jGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jGuardarActionPerformed(evt);
+            }
+        });
+
+        jAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/anterior.png"))); // NOI18N
+        jAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAnteriorActionPerformed(evt);
+            }
+        });
+
+        jSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/siguiente.png"))); // NOI18N
+        jSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSiguienteActionPerformed(evt);
+            }
+        });
+
+        jClase.setText("Clase de la dirección: " + direccion.getClase());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                            .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jClase)
                                     .addComponent(jLabelDirRed)
                                     .addComponent(jLabelDirBrod)
-                                    .addComponent(jLabelCantHost)
                                     .addComponent(jLabelHostMin)
-                                    .addComponent(jLabelHostMax)
-                                    .addComponent(jLabelPosicion))
+                                    .addComponent(jLabelCantHost))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jAnterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSiguiente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonVolver)
-                        .addGap(37, 37, 37))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(201, 201, 201)
+                                .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabelHostMax)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelPosicion)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelDirRed)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelDirBrod)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelCantHost)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelHostMin)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelHostMax)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelPosicion)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonVolver)
-                    .addComponent(jButton1))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jClase)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelDirRed)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelDirBrod)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelCantHost)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelHostMin)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelHostMax)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelPosicion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addComponent(jButtonVolver)
+                        .addGap(17, 17, 17))))
         );
 
         pack();
@@ -148,15 +202,56 @@ public class InformacionIP extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        BuscarIP i = new BuscarIP(this, true, direccion);
+        int posicion;
+        CalculosIP cal = new CalculosIP(direccion);
         
-        i.setVisible(true);
+        try {
+            posicion = Integer.parseInt(JOptionPane.showInputDialog("Introduce una posición"));
+            
+            if (posicion < 1 || posicion > cal.cantidadDeHost()){
+                JOptionPane.showMessageDialog(null, "Posición inválida", "Error", JOptionPane.ERROR_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "La ip de la posición " + posicion + " es " + cal.buscarIp(posicion), "Busqueda", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (HeadlessException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Pon un número", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
+        JFileChooser fc = new JFileChooser();
+        BufferedWriter bw;
+        
+        fc.setDialogTitle("Guardar datos");
+        fc.showSaveDialog(jGuardar);
+        
+        try {
+            bw = new BufferedWriter(new FileWriter(fc.getSelectedFile()));
+            
+            bw.write(direccion.info());
+            bw.close();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo guardar la información", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "No se seleccionó un archivo para guardar", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jGuardarActionPerformed
+
+    private void jAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnteriorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jAnteriorActionPerformed
+
+    private void jSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSiguienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSiguienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jAnterior;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonVolver;
+    private javax.swing.JLabel jClase;
+    private javax.swing.JButton jGuardar;
     private javax.swing.JLabel jLabelCantHost;
     private javax.swing.JLabel jLabelDirBrod;
     private javax.swing.JLabel jLabelDirRed;
@@ -164,5 +259,6 @@ public class InformacionIP extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelHostMin;
     private javax.swing.JLabel jLabelPosicion;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JButton jSiguiente;
     // End of variables declaration//GEN-END:variables
 }

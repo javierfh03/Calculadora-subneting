@@ -6,8 +6,9 @@ package calculadora.objects;
  * 
  * @author javier
  */
-public final class IP {
+public final class IP implements Comparable<IP>{
     private int primerOcteto, segundoOcteto, tercerOcteto, cuartoOcteto, mascara;
+    private char clase;
 
     /**
      * Constructor de la calse IP.
@@ -29,11 +30,27 @@ public final class IP {
         } catch (Exception e) {
             throw new Exception("Ip no válida");
         }
+        
+        setClase();
     }
 
     public IP() throws Exception {
         this(0,0,0,0,1);
     }
+    
+    private IP(int primerOcteto, int segundoOcteto, int tercerOcteto, int cuartoOcteto, char clase) throws Exception{
+        try {
+            setPrimerOcteto(primerOcteto);
+            setSegundoOcteto(segundoOcteto);
+            setTercerOcteto(tercerOcteto);
+            setCuartoOcteto(cuartoOcteto);
+            setMascara(1);
+            this.clase = clase;
+        } catch (Exception e) {
+            throw new Exception("Ip no válida");
+        }
+    }
+    
 
     public void setPrimerOcteto(int primerOcteto) throws Exception {
         if (primerOcteto > -1 && primerOcteto < 256){
@@ -76,6 +93,24 @@ public final class IP {
         }
     }
 
+    public void setClase() {
+        try{
+            if (this.compareTo(new IP(0, 0, 0, 0, 'A')) >= 0 && this.compareTo(new IP(127, 255, 255, 255, 'A')) < 0){
+                this.clase = 'A';
+            }else if (this.compareTo(new IP(128, 0, 0, 0, 'B')) >= 0 && this.compareTo(new IP(191, 255, 255, 255, 'B')) < 0){
+                this.clase = 'B';
+            }else if (this.compareTo(new IP(192, 0, 0, 0, 'C')) >= 0 && this.compareTo(new IP(223, 255, 255, 255, 'C')) < 0){
+                this.clase = 'C';
+            }else if (this.compareTo(new IP(224, 0, 0, 0, 'E')) >= 0 && this.compareTo(new IP(239, 255, 255, 255, 'E')) < 0){
+                this.clase = 'D';
+            }else{
+                this.clase = 'E';
+            }
+        }catch (Exception e){
+            this.clase = 'E';
+        }
+    }
+
     public int getPrimerOcteto() {
         return primerOcteto;
     }
@@ -94,6 +129,10 @@ public final class IP {
 
     public int getMascara() {
         return mascara;
+    }
+
+    public char getClase() {
+        return clase;
     }
     
     /**
@@ -202,6 +241,7 @@ public final class IP {
                 }
             }
             setMascara(Integer.parseInt(aux.toString()));
+            setClase();
         } catch (Exception e) {
             throw new Exception("Ip no válida");
         }
@@ -220,6 +260,7 @@ public final class IP {
         
         resultado.append("Cálculo IP ").append(this).append("\n");
         resultado.append("--------------------------------------").append("\n");
+        resultado.append("Clase de la dirección: ").append(getClase()).append("\n");
         resultado.append("Dirección de red: ");
         resultado.append(getMascara() > 31 ? "No hay dirección de red" : sacarDireccionDeSubred()).append("\n");
         resultado.append("Dirección de broadcast: ");
@@ -270,5 +311,34 @@ public final class IP {
     @Override
     public String toString() {
         return getPrimerOcteto() + "." + getSegundoOcteto() + "." + getTercerOcteto() + "." + getCuartoOcteto() + "/" + getMascara();
+    }
+
+    @Override
+    public int compareTo(IP arg0) {
+        if (getPrimerOcteto() < arg0.getPrimerOcteto()){
+            return -1;
+        } else if (getPrimerOcteto() > arg0.getPrimerOcteto()){
+            return 1;
+        }
+        
+        if (getSegundoOcteto() < arg0.getSegundoOcteto() ){
+            return -1;
+        } else if (getSegundoOcteto()  > arg0.getSegundoOcteto() ){
+            return 1;
+        }
+        
+        if (getTercerOcteto() < arg0.getTercerOcteto()){
+            return -1;
+        } else if (getTercerOcteto() > arg0.getTercerOcteto()){
+            return 1;
+        }
+        
+        if (getCuartoOcteto() < arg0.getCuartoOcteto()){
+            return -1;
+        } else if (getCuartoOcteto() > arg0.getCuartoOcteto()){
+            return 1;
+        }
+        
+        return 0;
     }
 }

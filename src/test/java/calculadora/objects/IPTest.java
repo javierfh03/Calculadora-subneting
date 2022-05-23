@@ -87,4 +87,37 @@ public class IPTest {
         ip.setIp("223.192.123.244/1");
         assertEquals("223.192.123.244/1", ip.toString());
     }
+    
+    @Test
+    public void testCompareTo() throws Exception{
+        IP ipComparador = new IP(192, 191, 255, 254, 10);
+        IP ip1 = new IP(213, 105, 64, 1, 20);
+        IP ip2 = new IP(192, 128, 1, 0, 10);
+        IP ip3 = new IP(213, 105, 64, 0, 20);
+        IP ip4 = new IP(213, 105, 79, 255, 20);
+        IP ip5 = new IP(192, 128, 0, 3, 10);
+        IP ip6 = new IP(192, 191, 255, 254, 10);
+        
+        assertEquals(-1, ipComparador.compareTo(ip1));
+        assertEquals(1, ipComparador.compareTo(ip2));
+        assertEquals(-1, ipComparador.compareTo(ip3));
+        assertEquals(-1, ipComparador.compareTo(ip4));
+        assertEquals(1, ipComparador.compareTo(ip5));
+        assertEquals(0, ipComparador.compareTo(ip6));
+    }
+    
+    @Test
+    public void testSetClase() throws Exception{
+        IP ip1 = new IP(8, 8, 8, 8, 20);
+        IP ip2 = new IP(134, 1, 13, 45, 10);
+        IP ip3 = new IP(192, 168, 1, 3, 24);
+        IP ip4 = new IP(225, 1, 1, 1, 20);
+        IP ip5 = new IP(252, 14, 88, 17, 10);
+        
+        assertEquals('A', ip1.getClase());
+        assertEquals('B', ip2.getClase());
+        assertEquals('C', ip3.getClase());
+        assertEquals('D', ip4.getClase());
+        assertEquals('E', ip5.getClase());
+    }
 }
