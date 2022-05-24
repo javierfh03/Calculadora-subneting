@@ -62,8 +62,8 @@ public class IPTest {
         // Probamos los casos límite.
         assertEquals(1, ip1.getPosicionIp());
         assertEquals(4194302, ip2.getPosicionIp());
-        assertEquals(-1, ip3.getPosicionIp());
-        assertEquals(-1, ip4.getPosicionIp());
+        assertEquals(0, ip3.getPosicionIp());
+        assertEquals(4095, ip4.getPosicionIp());
         
         // Probamos casos aleatorios.
         assertEquals(3, ip5.getPosicionIp());
