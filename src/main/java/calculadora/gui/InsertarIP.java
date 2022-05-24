@@ -1,5 +1,4 @@
 package calculadora.gui;
-import calculadora.gui.InformacionIP;
 import calculadora.objects.IP;
 import javax.swing.JOptionPane;
 
@@ -48,18 +47,18 @@ public class InsertarIP extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonCalcular)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonAyuda))
+                        .addComponent(jButtonCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addComponent(jButtonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelDir)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldDir, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addComponent(jTextFieldDir)))
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +79,8 @@ public class InsertarIP extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAyudaActionPerformed
-        JOptionPane.showMessageDialog(null, "La dirección IP debe tener la siguiente estructura: X.X.X.X/X", "Información", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "La dirección IP debe tener la siguiente estructura: X.X.X.X/X", 
+                "Información", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonAyudaActionPerformed
 
     private void jButtonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularActionPerformed
@@ -93,7 +93,8 @@ public class InsertarIP extends javax.swing.JFrame {
                 dirIP = new IP();
 
                 if (!dir.matches("[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}/[0-9]{1,2}")){
-                    JOptionPane.showMessageDialog(null, "La dirección IP debe tener la siguiente estructura: X.X.X.X/X", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "La dirección IP debe tener la siguiente estructura: X.X.X.X/X", 
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }else{
                     dirIP.setIp(dir);
                     ven = new InformacionIP(dirIP);

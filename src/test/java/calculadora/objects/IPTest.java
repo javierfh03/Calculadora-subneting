@@ -60,15 +60,15 @@ public class IPTest {
         IP ip7 = new IP(192, 128, 1, 0, 10);
         
         // Probamos los casos límite.
-        assertEquals(1, ip1.posicionIp());
-        assertEquals(4194302, ip2.posicionIp());
-        assertEquals(-1, ip3.posicionIp());
-        assertEquals(-1, ip4.posicionIp());
+        assertEquals(1, ip1.getPosicionIp());
+        assertEquals(4194302, ip2.getPosicionIp());
+        assertEquals(-1, ip3.getPosicionIp());
+        assertEquals(-1, ip4.getPosicionIp());
         
         // Probamos casos aleatorios.
-        assertEquals(3, ip5.posicionIp());
-        assertEquals(255, ip6.posicionIp());
-        assertEquals(256, ip7.posicionIp());
+        assertEquals(3, ip5.getPosicionIp());
+        assertEquals(255, ip6.getPosicionIp());
+        assertEquals(256, ip7.getPosicionIp());
     }
     
     @Test

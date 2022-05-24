@@ -136,6 +136,24 @@ public final class IP implements Comparable<IP>{
     }
     
     /**
+     * Este método determina la posición de la IP, en la subred a la que pertenece.
+     * 
+     * @return El número de la posición que se encuentra.
+     */
+    public int getPosicionIp(){
+        String estaIp = new CalculosIP(this).ipBinario();
+        int estaIpNum = Transformador.binarioDecimal(estaIp.substring(getMascara(), 32));
+        
+        // Los casos con máscara mayor a 30 son especiales.
+        if (getMascara() > 30){
+            return estaIpNum + 1;
+        }else{
+            // La posición de la dirección de red o broadcast no se cuenta.
+            return estaIpNum;
+        }
+    }
+    
+    /**
      * Este método se encarga de sacar la dirección de subred de la dirección IP.
      * 
      * @return Un objeto IP que contiene la dirección de red.
@@ -180,28 +198,6 @@ public final class IP implements Comparable<IP>{
             return CalculosIP.ipDecimal(ipBinario.toString(), getMascara());
         } catch (Exception e) {
             return null;
-        }
-    }
-    
-    /**
-     * Este método determina la posición de la IP, en la subred a la que pertenece.
-     * 
-     * @return El número de la posición que se encuentra.
-     */
-    public int posicionIp(){
-        String estaIp = new CalculosIP(this).ipBinario();
-        int estaIpNum = Transformador.binarioDecimal(estaIp.substring(getMascara(), 32));
-        
-        // Los casos con máscara mayor a 30 son especiales.
-        if (getMascara() > 30){
-            return estaIpNum + 1;
-        }else{
-            // La posición de la dirección de red o broadcast no se cuenta.
-            if (this.sacarDireccionDeBroadcast().equals(this) || this.sacarDireccionDeSubred().equals(this)){
-                return -1;
-            }else{
-                return estaIpNum;
-            }
         }
     }
     
@@ -257,21 +253,17 @@ public final class IP implements Comparable<IP>{
         CalculosIP cal = new CalculosIP(this);
         int cantHost = cal.cantidadDeHost();
         StringBuilder resultado = new StringBuilder();
+        IP max = cal.buscarIp(cantHost), min = cal.buscarIp(1);
         
         resultado.append("Cálculo IP ").append(this).append("\n");
         resultado.append("--------------------------------------").append("\n");
         resultado.append("Clase de la dirección: ").append(getClase()).append("\n");
-        resultado.append("Dirección de red: ");
-        resultado.append(getMascara() > 31 ? "No hay dirección de red" : sacarDireccionDeSubred()).append("\n");
-        resultado.append("Dirección de broadcast: ");
-        resultado.append(getMascara() > 31 ? "No hay dirección de broadcast" : sacarDireccionDeBroadcast()).append("\n");
+        resultado.append("Dirección de red: ").append(sacarDireccionDeSubred()).append("\n");
+        resultado.append("Dirección de broadcast: ").append(sacarDireccionDeBroadcast()).append("\n");
         resultado.append("Cantidad de host válidos: ").append(cantHost).append("\n");
-        resultado.append("Host mínimo: ");
-        resultado.append(getMascara() > 30 ? "No hay host mínimo" : cal.buscarIp(1)).append("\n");
-        resultado.append("Host máximo: ");
-        resultado.append(getMascara() > 30 ? "No hay host máximo" : cal.buscarIp(cantHost)).append("\n");
-        resultado.append("Posición de la IP: ");
-        resultado.append(posicionIp() < 0 ? "Posición no válida" : posicionIp()).append("\n");
+        resultado.append("Host mínimo: ").append(min).append("\n");
+        resultado.append("Host máximo: ").append(max).append("\n");
+        resultado.append("Posición de la IP: ").append(getPosicionIp()).append("\n");
         resultado.append("--------------------------------------");
         
         return resultado.toString();
@@ -310,7 +302,8 @@ public final class IP implements Comparable<IP>{
 
     @Override
     public String toString() {
-        return getPrimerOcteto() + "." + getSegundoOcteto() + "." + getTercerOcteto() + "." + getCuartoOcteto() + "/" + getMascara();
+        return getPrimerOcteto() + "." + getSegundoOcteto() + "." + getTercerOcteto() + "." + getCuartoOcteto() + "/" + 
+                getMascara();
     }
 
     @Override

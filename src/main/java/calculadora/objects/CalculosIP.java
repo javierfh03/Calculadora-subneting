@@ -1,5 +1,9 @@
 package calculadora.objects;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /**
  * Esta clase contiene funciones que realizan cálculos para el manejo de 
  * direcciones IP.
@@ -56,6 +60,13 @@ public class CalculosIP {
         StringBuilder ipPos = new StringBuilder("");
         int redNum = Transformador.binarioDecimal(red.substring(ip.getMascara(), 32));
         
+        // Si la máscara es mayor a 30, se ajusta la posición, si es 32 devolvemos la misma IP.
+        if (ip.getMascara() > 31){
+            return ip;
+        } else if (ip.getMascara() > 30){
+            posicion--;
+        }
+        
         // Sumamos la posición a la IP de red y la convertimos a binario.
         redNum += posicion;
         hostPos = Transformador.decimalBinario(redNum);
@@ -73,7 +84,7 @@ public class CalculosIP {
         
         try {
             return ipDecimal(ipPos.toString(), ip.getMascara());
-        } catch (Exception e) {
+        } catch (Exception ex) {
             return null;
         }
     }

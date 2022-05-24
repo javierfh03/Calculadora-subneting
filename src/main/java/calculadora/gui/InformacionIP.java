@@ -6,6 +6,8 @@ import java.awt.HeadlessException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -25,20 +27,7 @@ public class InformacionIP extends javax.swing.JFrame {
      * @param direccion La dirección IP de la que se quiere sacar la información.
      */
     public InformacionIP(IP direccion) {
-        this.direccion = direccion;
-        CalculosIP cal = new CalculosIP(direccion);
-        
-        try {
-            cantHost = cal.cantidadDeHost();
-            dirRed = direccion.getMascara() > 31 ? "No hay dirección de red" : direccion.sacarDireccionDeSubred().toString();
-            dirBro = direccion.getMascara() > 31 ? "No hay dirección de broadcast" : direccion.sacarDireccionDeBroadcast().toString();
-            hostMin = direccion.getMascara() > 30 ? "No hay host mínimo" : cal.buscarIp(1).toString();
-            hostMax = direccion.getMascara() > 30 ? "No hay host máximo" : cal.buscarIp(cantHost).toString();
-            pos = direccion.posicionIp() < 0 ? "Posición no válida" : direccion.posicionIp() + "";
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo realizar la consulta", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        
+        espablecerIP(direccion);
         initComponents();
     }
 
@@ -54,7 +43,7 @@ public class InformacionIP extends javax.swing.JFrame {
         jLabelHostMax = new javax.swing.JLabel();
         jLabelPosicion = new javax.swing.JLabel();
         jButtonVolver = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jBuscar = new javax.swing.JButton();
         jGuardar = new javax.swing.JButton();
         jAnterior = new javax.swing.JButton();
         jSiguiente = new javax.swing.JButton();
@@ -86,10 +75,10 @@ public class InformacionIP extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buscar.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buscar.png"))); // NOI18N
+        jBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBuscarActionPerformed(evt);
             }
         });
 
@@ -137,7 +126,7 @@ public class InformacionIP extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jAnterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSiguiente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -160,7 +149,7 @@ public class InformacionIP extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,23 +190,34 @@ public class InformacionIP extends javax.swing.JFrame {
         i.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /**
+     * Este método busca en una subred una dirección especificandole en número de host.
+     * 
+     * @param evt El ActionEvent.
+     */
+    private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
         int posicion;
         CalculosIP cal = new CalculosIP(direccion);
         
         try {
             posicion = Integer.parseInt(JOptionPane.showInputDialog("Introduce una posición"));
             
-            if (posicion < 1 || posicion > cal.cantidadDeHost()){
+            if (posicion < 0 || posicion > cal.cantidadDeHost()){
                 JOptionPane.showMessageDialog(null, "Posición inválida", "Error", JOptionPane.ERROR_MESSAGE);
             }else{
-                JOptionPane.showMessageDialog(null, "La ip de la posición " + posicion + " es " + cal.buscarIp(posicion), "Busqueda", JOptionPane.INFORMATION_MESSAGE);
+                espablecerIP(cal.buscarIp(posicion));
+                actualizarDatos();
             }
         } catch (HeadlessException | NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Pon un número", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBuscarActionPerformed
 
+    /**
+     * Este método guarda en un archivo la información de la dirección IP.
+     * 
+     * @param evt El ActionEvent.
+     */
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
         JFileChooser fc = new JFileChooser();
         BufferedWriter bw;
@@ -233,22 +233,75 @@ public class InformacionIP extends javax.swing.JFrame {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "No se pudo guardar la información", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (NullPointerException ex){
-            JOptionPane.showMessageDialog(null, "No se seleccionó un archivo para guardar", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se seleccionó un archivo para guardar", "Advertencia", 
+                    JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jGuardarActionPerformed
 
+    /**
+     * Este método muestra la anterior dirección IP de la que se muestra.
+     * 
+     * @param evt El ActionEvent.
+     */
     private void jAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnteriorActionPerformed
-        // TODO add your handling code here:
+        CalculosIP cal = new CalculosIP(direccion);
+        
+        espablecerIP(cal.buscarIp(direccion.getPosicionIp() - 1));
+        actualizarDatos();
+
     }//GEN-LAST:event_jAnteriorActionPerformed
 
+    /**
+     * Este método muestra la siguiente dirección IP de la que se muestra.
+     * 
+     * @param evt El ActionEvent.
+     */
     private void jSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSiguienteActionPerformed
-        // TODO add your handling code here:
+        CalculosIP cal = new CalculosIP(direccion);
+
+        if (direccion.getPosicionIp() < cal.cantidadDeHost() + 1){
+            espablecerIP(cal.buscarIp(direccion.getPosicionIp() + 1));
+            actualizarDatos();
+        }
     }//GEN-LAST:event_jSiguienteActionPerformed
 
+    /**
+     * Este método establece los atributos de la ventana en base a una dirección IP.
+     * 
+     * @param direccion La dirección IP que se quiere establecer.
+     */
+    private void espablecerIP(IP direccion){
+        this.direccion = direccion;
+        CalculosIP cal = new CalculosIP(direccion);
+        
+        try {
+            cantHost = cal.cantidadDeHost();
+            dirRed = direccion.sacarDireccionDeSubred().toString();
+            dirBro = direccion.sacarDireccionDeBroadcast().toString();
+            hostMin = cal.buscarIp(1).toString();
+            hostMax = cal.buscarIp(cantHost).toString();
+            pos = direccion.getPosicionIp() + "";
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo realizar la consulta", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    /**
+     * Este método actualiza los datos de la ventana.
+     */
+    private void actualizarDatos(){
+        jLabelTitulo.setText("Información de la IP: " + this.direccion);
+        jLabelDirRed.setText("Dirección de red: " + dirRed);
+        jLabelDirBrod.setText("Dirección de broadcast: " + dirBro);
+        jLabelCantHost.setText("Cantidad de host válidos: " + cantHost);
+        jLabelHostMin.setText("Host mínimo: " + hostMin);
+        jLabelHostMax.setText("Host máximo: " + hostMax);
+        jLabelPosicion.setText("Posición de la IP: " + pos);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAnterior;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBuscar;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JLabel jClase;
     private javax.swing.JButton jGuardar;
