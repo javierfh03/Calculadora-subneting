@@ -9,7 +9,7 @@ package calculadora.objects;
 public class Transformador {
     
     /**
-     * Esta función combierte un número entero en binario.
+     * Esta función convierte un número entero en binario.
      * 
      * @param decimal El número que se quiere combertir a binario.
      * @return El resultado en binario guardado en una cadena.

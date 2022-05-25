@@ -21,15 +21,11 @@ public final class IP implements Comparable<IP>{
      * @throws java.lang.Exception Si la IP no es válida se lanza una excepción.
      */
     public IP(int primerOcteto, int segundoOcteto, int tercerOcteto, int cuartoOcteto, int mascara) throws Exception {
-        try {
-            setPrimerOcteto(primerOcteto);
-            setSegundoOcteto(segundoOcteto);
-            setTercerOcteto(tercerOcteto);
-            setCuartoOcteto(cuartoOcteto);
-            setMascara(mascara);
-        } catch (Exception e) {
-            throw new Exception("Ip no válida");
-        }
+        setPrimerOcteto(primerOcteto);
+        setSegundoOcteto(segundoOcteto);
+        setTercerOcteto(tercerOcteto);
+        setCuartoOcteto(cuartoOcteto);
+        setMascara(mascara);
         
         setClase();
     }
@@ -39,16 +35,12 @@ public final class IP implements Comparable<IP>{
     }
     
     private IP(int primerOcteto, int segundoOcteto, int tercerOcteto, int cuartoOcteto, char clase) throws Exception{
-        try {
-            setPrimerOcteto(primerOcteto);
-            setSegundoOcteto(segundoOcteto);
-            setTercerOcteto(tercerOcteto);
-            setCuartoOcteto(cuartoOcteto);
-            setMascara(1);
-            this.clase = clase;
-        } catch (Exception e) {
-            throw new Exception("Ip no válida");
-        }
+        setPrimerOcteto(primerOcteto);
+        setSegundoOcteto(segundoOcteto);
+        setTercerOcteto(tercerOcteto);
+        setCuartoOcteto(cuartoOcteto);
+        setMascara(1);
+        this.clase = clase;
     }
     
 
@@ -93,20 +85,21 @@ public final class IP implements Comparable<IP>{
         }
     }
 
-    public void setClase() {
-        try{
-            if (this.compareTo(new IP(0, 0, 0, 0, 'A')) >= 0 && this.compareTo(new IP(127, 255, 255, 255, 'A')) < 0){
-                this.clase = 'A';
-            }else if (this.compareTo(new IP(128, 0, 0, 0, 'B')) >= 0 && this.compareTo(new IP(191, 255, 255, 255, 'B')) < 0){
-                this.clase = 'B';
-            }else if (this.compareTo(new IP(192, 0, 0, 0, 'C')) >= 0 && this.compareTo(new IP(223, 255, 255, 255, 'C')) < 0){
-                this.clase = 'C';
-            }else if (this.compareTo(new IP(224, 0, 0, 0, 'E')) >= 0 && this.compareTo(new IP(239, 255, 255, 255, 'E')) < 0){
-                this.clase = 'D';
-            }else{
-                this.clase = 'E';
-            }
-        }catch (Exception e){
+    /**
+     * Este método esteblece una clase a la dirección IP dependiendo del rango en el que se encuentre.
+     * 
+     * @throws Exception 
+     */
+    public void setClase() throws Exception {
+        if (this.compareTo(new IP(0, 0, 0, 0, 'A')) >= 0 && this.compareTo(new IP(127, 255, 255, 255, 'A')) < 0){
+            this.clase = 'A';
+        }else if (this.compareTo(new IP(128, 0, 0, 0, 'B')) >= 0 && this.compareTo(new IP(191, 255, 255, 255, 'B')) < 0){
+            this.clase = 'B';
+        }else if (this.compareTo(new IP(192, 0, 0, 0, 'C')) >= 0 && this.compareTo(new IP(223, 255, 255, 255, 'C')) < 0){
+            this.clase = 'C';
+        }else if (this.compareTo(new IP(224, 0, 0, 0, 'E')) >= 0 && this.compareTo(new IP(239, 255, 255, 255, 'E')) < 0){
+            this.clase = 'D';
+        }else{
             this.clase = 'E';
         }
     }
@@ -157,8 +150,9 @@ public final class IP implements Comparable<IP>{
      * Este método se encarga de sacar la dirección de subred de la dirección IP.
      * 
      * @return Un objeto IP que contiene la dirección de red.
+     * @throws java.lang.Exception Devuelve error en caso de fallas en el cálculo decimal.
      */
-    public IP sacarDireccionDeSubred(){
+    public IP sacarDireccionDeSubred() throws Exception{
         StringBuilder aux = new StringBuilder("");
         StringBuilder ipBinario = new StringBuilder(new CalculosIP(this).ipBinario());
         
@@ -170,19 +164,16 @@ public final class IP implements Comparable<IP>{
         // Añadimos los 0 reemplazando los bits de host.
         ipBinario.replace(mascara, 32, aux.toString());
         
-        try {
-            return CalculosIP.ipDecimal(ipBinario.toString(), getMascara());
-        } catch (Exception e) {
-            return null;
-        }
+        return CalculosIP.ipDecimal(ipBinario.toString(), getMascara());
     }
     
     /**
      * Este método se encarga de sacar la dirección de broadcast de la dirección IP.
      * 
      * @return Un objeto IP que contiene la dirección de broadcast.
+     * @throws java.lang.Exception Devuelve error en caso de fallas en el cálculo decimal.
      */
-    public IP sacarDireccionDeBroadcast(){
+    public IP sacarDireccionDeBroadcast() throws Exception{
         StringBuilder aux = new StringBuilder("");
         StringBuilder ipBinario = new StringBuilder(new CalculosIP(this).ipBinario());
         
@@ -194,11 +185,7 @@ public final class IP implements Comparable<IP>{
         // Añadimos los 1 reemplazando los bits de host.
         ipBinario.replace(mascara, 32, aux.toString());
         
-        try {
-            return CalculosIP.ipDecimal(ipBinario.toString(), getMascara());
-        } catch (Exception e) {
-            return null;
-        }
+        return CalculosIP.ipDecimal(ipBinario.toString(), getMascara());
     }
     
     /**
@@ -251,20 +238,28 @@ public final class IP implements Comparable<IP>{
      */
     public String info(){
         CalculosIP cal = new CalculosIP(this);
-        int cantHost = cal.cantidadDeHost();
+        int cantHost;
         StringBuilder resultado = new StringBuilder();
-        IP max = cal.buscarIp(cantHost), min = cal.buscarIp(1);
+        IP max, min;
         
-        resultado.append("Cálculo IP ").append(this).append("\n");
-        resultado.append("--------------------------------------").append("\n");
-        resultado.append("Clase de la dirección: ").append(getClase()).append("\n");
-        resultado.append("Dirección de red: ").append(sacarDireccionDeSubred()).append("\n");
-        resultado.append("Dirección de broadcast: ").append(sacarDireccionDeBroadcast()).append("\n");
-        resultado.append("Cantidad de host válidos: ").append(cantHost).append("\n");
-        resultado.append("Host mínimo: ").append(min).append("\n");
-        resultado.append("Host máximo: ").append(max).append("\n");
-        resultado.append("Posición de la IP: ").append(getPosicionIp()).append("\n");
-        resultado.append("--------------------------------------");
+        try {
+            cantHost = cal.cantidadDeHost();
+            min = cal.buscarIp(1);
+            max = cal.buscarIp(cantHost);
+            
+            resultado.append("Cálculo IP ").append(this).append("\n");
+            resultado.append("--------------------------------------").append("\n");
+            resultado.append("Clase de la dirección: ").append(getClase()).append("\n");
+            resultado.append("Dirección de red: ").append(sacarDireccionDeSubred()).append("\n");
+            resultado.append("Dirección de broadcast: ").append(sacarDireccionDeBroadcast()).append("\n");
+            resultado.append("Cantidad de host válidos: ").append(cantHost).append("\n");
+            resultado.append("Host mínimo: ").append(min).append("\n");
+            resultado.append("Host máximo: ").append(max).append("\n");
+            resultado.append("Posición de la IP: ").append(getPosicionIp()).append("\n");
+            resultado.append("--------------------------------------");
+        } catch (Exception e) {
+            return "";
+        }
         
         return resultado.toString();
     }

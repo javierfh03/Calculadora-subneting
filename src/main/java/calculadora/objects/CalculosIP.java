@@ -1,8 +1,5 @@
 package calculadora.objects;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 /**
  * Esta clase contiene funciones que realizan cálculos para el manejo de 
@@ -26,8 +23,9 @@ public class CalculosIP {
      * IP.
      * 
      * @return Un entero con la cantidad de host.
+     * @throws java.lang.Exception Devuelve un error si hay problemas con la máscara de red o brodcast.
      */
-    public int cantidadDeHost(){
+    public int cantidadDeHost() throws Exception{
         String primera, ultima;
         int primeraNum, ultimaNum;
         
@@ -47,13 +45,13 @@ public class CalculosIP {
     }
     
     /**
-     * Esta función se encarga de buscar una IP de una subred mediante su posición en
-     * esta última.
+     * Esta función se encarga de buscar una IP de una subred mediante su posición en esta última.
      * 
      * @param posicion La posición de la IP que se busca.
      * @return Un objeto IP en el que estará almacenada la IP buscada.
+     * @throws java.lang.Exception Devuelve un error si la posición no es válida.
      */
-    public IP buscarIp(int posicion){
+    public IP buscarIp(int posicion) throws Exception{
         String red = ipBinario(ip.sacarDireccionDeSubred());
         String hostPos;
         StringBuilder aux = new StringBuilder(""); 
@@ -82,11 +80,7 @@ public class CalculosIP {
         // Sustituimos los bits de host de la dirección de red por los host de la IP buscada.
         ipPos.replace(ip.getMascara(), 32, aux.toString() + hostPos);
         
-        try {
-            return ipDecimal(ipPos.toString(), ip.getMascara());
-        } catch (Exception ex) {
-            return null;
-        }
+        return ipDecimal(ipPos.toString(), ip.getMascara());
     }
     
     /**
@@ -135,7 +129,7 @@ public class CalculosIP {
                 Transformador.binarioDecimal(ipBin.substring(24, 32)), mascara);
             return ip;
         }else{
-            return new IP();
+            throw new Exception("IP fuera del rango");
         }
     }
 }

@@ -2,12 +2,9 @@ package calculadora.gui;
 
 import calculadora.objects.CalculosIP;
 import calculadora.objects.IP;
-import java.awt.HeadlessException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -202,14 +199,12 @@ public class InformacionIP extends javax.swing.JFrame {
         try {
             posicion = Integer.parseInt(JOptionPane.showInputDialog("Introduce una posición"));
             
-            if (posicion < 0 || posicion > cal.cantidadDeHost()){
-                JOptionPane.showMessageDialog(null, "Posición inválida", "Error", JOptionPane.ERROR_MESSAGE);
-            }else{
-                espablecerIP(cal.buscarIp(posicion));
-                actualizarDatos();
-            }
-        } catch (HeadlessException | NumberFormatException e) {
+            espablecerIP(cal.buscarIp(posicion));
+            actualizarDatos();
+        } catch (NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Pon un número", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Posición inválida", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBuscarActionPerformed
 
@@ -246,9 +241,13 @@ public class InformacionIP extends javax.swing.JFrame {
     private void jAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnteriorActionPerformed
         CalculosIP cal = new CalculosIP(direccion);
         
-        espablecerIP(cal.buscarIp(direccion.getPosicionIp() - 1));
-        actualizarDatos();
-
+        try {
+            espablecerIP(cal.buscarIp(direccion.getPosicionIp() - 1));
+            actualizarDatos();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se puede obtener la anterior IP", "Advertencia", 
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jAnteriorActionPerformed
 
     /**
@@ -259,9 +258,14 @@ public class InformacionIP extends javax.swing.JFrame {
     private void jSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSiguienteActionPerformed
         CalculosIP cal = new CalculosIP(direccion);
 
-        if (direccion.getPosicionIp() < cal.cantidadDeHost() + 1){
-            espablecerIP(cal.buscarIp(direccion.getPosicionIp() + 1));
-            actualizarDatos();
+        try {
+            if (direccion.getPosicionIp() < cal.cantidadDeHost() + 1){
+                espablecerIP(cal.buscarIp(direccion.getPosicionIp() + 1));
+                actualizarDatos();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se puede obtener la siguiente IP", "Advertencia", 
+                    JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jSiguienteActionPerformed
 

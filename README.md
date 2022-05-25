@@ -12,3 +12,4 @@ Permite la siguientes funciones:
 - Guardar en un archivo la información de la dirección IP introducida.
 ## Descargar
 Puedes descargar la calculadora en el siguiente link: https://raspifj.duckdns.org/Directorio/Proyectos/Calculadora_subneting/Calculadora_subneting.jar
+Está compilado en java 1.8
