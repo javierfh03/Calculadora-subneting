@@ -44,7 +44,14 @@ public class InformacionIP extends javax.swing.JFrame {
         jGuardar = new javax.swing.JButton();
         jAnterior = new javax.swing.JButton();
         jSiguiente = new javax.swing.JButton();
-        jClase = new javax.swing.JLabel();
+        jLabelClase = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jDirRed = new javax.swing.JTextField();
+        jDirBrod = new javax.swing.JTextField();
+        jCantHost = new javax.swing.JTextField();
+        jHostMin = new javax.swing.JTextField();
+        jHostMax = new javax.swing.JTextField();
+        jPosicion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculadora de subneting");
@@ -53,17 +60,17 @@ public class InformacionIP extends javax.swing.JFrame {
         jLabelTitulo.setFont(new java.awt.Font("Lato Heavy", 0, 22)); // NOI18N
         jLabelTitulo.setText("Información de la IP: " + this.direccion);
 
-        jLabelDirRed.setText("Dirección de red: " + dirRed);
+        jLabelDirRed.setText("Dirección de red:");
 
-        jLabelDirBrod.setText("Dirección de broadcast: " + dirBro);
+        jLabelDirBrod.setText("Dirección de broadcast:");
 
-        jLabelCantHost.setText("Cantidad de host válidos: " + cantHost);
+        jLabelCantHost.setText("Cantidad de host válidos:");
 
-        jLabelHostMin.setText("Host mínimo: " + hostMin);
+        jLabelHostMin.setText("Host mínimo:");
 
-        jLabelHostMax.setText("Host máximo: " + hostMax);
+        jLabelHostMax.setText("Host máximo:");
 
-        jLabelPosicion.setText("Posición de la IP: " + pos);
+        jLabelPosicion.setText("Posición de la IP:");
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +107,35 @@ public class InformacionIP extends javax.swing.JFrame {
             }
         });
 
-        jClase.setText("Clase de la dirección: " + direccion.getClase());
+        jLabelClase.setText("Clase de la dirección:");
+
+        jTextField1.setEditable(false);
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setText(direccion.getClase() + "");
+
+        jDirRed.setEditable(false);
+        jDirRed.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jDirRed.setText(dirRed);
+
+        jDirBrod.setEditable(false);
+        jDirBrod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jDirBrod.setText(dirBro);
+
+        jCantHost.setEditable(false);
+        jCantHost.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jCantHost.setText(cantHost + "");
+
+        jHostMin.setEditable(false);
+        jHostMin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jHostMin.setText(hostMin);
+
+        jHostMax.setEditable(false);
+        jHostMax.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jHostMax.setText(hostMax);
+
+        jPosicion.setEditable(false);
+        jPosicion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPosicion.setText(pos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,11 +149,26 @@ public class InformacionIP extends javax.swing.JFrame {
                             .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jClase)
-                                    .addComponent(jLabelDirRed)
-                                    .addComponent(jLabelDirBrod)
-                                    .addComponent(jLabelHostMin)
-                                    .addComponent(jLabelCantHost))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelDirBrod)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jDirBrod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelHostMin)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jHostMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelClase)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelDirRed)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jDirRed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelCantHost)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCantHost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,16 +179,20 @@ public class InformacionIP extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(201, 201, 201)
-                                .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabelHostMax)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jLabelHostMax)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jHostMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(201, 201, 201)
+                                .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 3, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelPosicion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPosicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -158,20 +212,34 @@ public class InformacionIP extends javax.swing.JFrame {
                         .addComponent(jAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jClase)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelClase)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabelDirRed)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelDirRed)
+                            .addComponent(jDirRed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabelDirBrod)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelDirBrod)
+                            .addComponent(jDirBrod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabelCantHost)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelCantHost)
+                            .addComponent(jCantHost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabelHostMin)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelHostMin)
+                            .addComponent(jHostMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabelHostMax)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelHostMax)
+                            .addComponent(jHostMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabelPosicion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelPosicion)
+                            .addComponent(jPosicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addComponent(jButtonVolver)
                         .addGap(17, 17, 17))))
         );
@@ -259,10 +327,8 @@ public class InformacionIP extends javax.swing.JFrame {
         CalculosIP cal = new CalculosIP(direccion);
 
         try {
-            if (direccion.getPosicionIp() < cal.cantidadDeHost() + 1){
-                espablecerIP(cal.buscarIp(direccion.getPosicionIp() + 1));
-                actualizarDatos();
-            }
+            espablecerIP(cal.buscarIp(direccion.getPosicionIp() + 1));
+            actualizarDatos();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se puede obtener la siguiente IP", "Advertencia", 
                     JOptionPane.WARNING_MESSAGE);
@@ -295,27 +361,34 @@ public class InformacionIP extends javax.swing.JFrame {
      */
     private void actualizarDatos(){
         jLabelTitulo.setText("Información de la IP: " + this.direccion);
-        jLabelDirRed.setText("Dirección de red: " + dirRed);
-        jLabelDirBrod.setText("Dirección de broadcast: " + dirBro);
-        jLabelCantHost.setText("Cantidad de host válidos: " + cantHost);
-        jLabelHostMin.setText("Host mínimo: " + hostMin);
-        jLabelHostMax.setText("Host máximo: " + hostMax);
-        jLabelPosicion.setText("Posición de la IP: " + pos);
+        jDirRed.setText(dirRed);
+        jDirBrod.setText(dirBro);
+        jCantHost.setText(cantHost + "");
+        jHostMin.setText(hostMin);
+        jHostMax.setText(hostMax);
+        jPosicion.setText(pos);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAnterior;
     private javax.swing.JButton jBuscar;
     private javax.swing.JButton jButtonVolver;
-    private javax.swing.JLabel jClase;
+    private javax.swing.JTextField jCantHost;
+    private javax.swing.JTextField jDirBrod;
+    private javax.swing.JTextField jDirRed;
     private javax.swing.JButton jGuardar;
+    private javax.swing.JTextField jHostMax;
+    private javax.swing.JTextField jHostMin;
     private javax.swing.JLabel jLabelCantHost;
+    private javax.swing.JLabel jLabelClase;
     private javax.swing.JLabel jLabelDirBrod;
     private javax.swing.JLabel jLabelDirRed;
     private javax.swing.JLabel jLabelHostMax;
     private javax.swing.JLabel jLabelHostMin;
     private javax.swing.JLabel jLabelPosicion;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JTextField jPosicion;
     private javax.swing.JButton jSiguiente;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

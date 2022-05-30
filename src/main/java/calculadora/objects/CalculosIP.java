@@ -52,11 +52,13 @@ public class CalculosIP {
      * @throws java.lang.Exception Devuelve un error si la posición no es válida.
      */
     public IP buscarIp(int posicion) throws Exception{
-        String red = ipBinario(ip.sacarDireccionDeSubred());
-        String hostPos;
-        StringBuilder aux = new StringBuilder(""); 
-        StringBuilder ipPos = new StringBuilder("");
+        String red = ipBinario(ip.sacarDireccionDeSubred()), hostPos;
+        StringBuilder aux = new StringBuilder(""), ipPos = new StringBuilder(""); 
         int redNum = Transformador.binarioDecimal(red.substring(ip.getMascara(), 32));
+        
+        if (posicion < 0 || posicion > (cantidadDeHost() + 1)){
+            throw new Exception("Posición no válida");
+        }
         
         // Si la máscara es mayor a 30, se ajusta la posición, si es 32 devolvemos la misma IP.
         if (ip.getMascara() > 31){
@@ -74,10 +76,9 @@ public class CalculosIP {
             aux.append("0");
         }  
         
-        // Añadimos el binario de la IP de subred.
+        /* Añadimos el binario de la IP de subred y sustituimos los bits de host de la dirección de red por los host de 
+        la IP buscada. */
         ipPos.append(red);
-        
-        // Sustituimos los bits de host de la dirección de red por los host de la IP buscada.
         ipPos.replace(ip.getMascara(), 32, aux.toString() + hostPos);
         
         return ipDecimal(ipPos.toString(), ip.getMascara());
