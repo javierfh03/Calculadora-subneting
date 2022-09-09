@@ -196,7 +196,7 @@ public final class IP implements Comparable<IP>{
      * @throws java.lang.Exception Si la IP no es válida se lanza una excepción.
      */
     public void setIp(String ipStr) throws Exception{
-        int con = 0;
+        int conOctetos = 0, conSimbolos = 0;
         StringBuilder aux = new StringBuilder();
         
         try {
@@ -204,8 +204,9 @@ public final class IP implements Comparable<IP>{
             for (int i = 0; i < ipStr.length(); i++) {
                 if (ipStr.charAt(i) != '.' && ipStr.charAt(i) != '/'){
                     aux.append(ipStr.charAt(i));
+                    conSimbolos++;
                 }else{
-                    switch(con){
+                    switch(conOctetos){
                         case 0:
                             setPrimerOcteto(Integer.parseInt(aux.toString()));
                             break;
@@ -220,11 +221,16 @@ public final class IP implements Comparable<IP>{
                             break;
                     }
                     aux.setLength(0);
-                    con++;
+                    conOctetos++;
                 }
             }
-            setMascara(Integer.parseInt(aux.toString()));
-            setClase();
+            
+            if (conSimbolos > 3){
+                setMascara(Integer.parseInt(aux.toString()));
+                setClase();
+            }else{
+                throw new Exception("Ip no válida");
+            }
         } catch (Exception e) {
             throw new Exception("Ip no válida");
         }

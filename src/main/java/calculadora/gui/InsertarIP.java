@@ -1,6 +1,5 @@
 package calculadora.gui;
 import calculadora.objects.IP;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,7 +12,6 @@ public class InsertarIP extends javax.swing.JFrame {
     
     public InsertarIP() {
         initComponents();
-        rellenarComboBox();
     }
 
     @SuppressWarnings("unchecked")
@@ -24,11 +22,7 @@ public class InsertarIP extends javax.swing.JFrame {
         jLabelDir = new javax.swing.JLabel();
         jButtonCalcular = new javax.swing.JButton();
         jSalir = new javax.swing.JButton();
-        jPrimerOcteto = new javax.swing.JComboBox<>();
-        jCuartoOcteto = new javax.swing.JComboBox<>();
-        jSegundoOcteto = new javax.swing.JComboBox<>();
-        jTercerOcteto = new javax.swing.JComboBox<>();
-        jMascara = new javax.swing.JComboBox<>();
+        jIP = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -46,8 +40,10 @@ public class InsertarIP extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(511, 160));
         setResizable(false);
 
+        jLabelDir.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jLabelDir.setText("Dirección IP:");
 
+        jButtonCalcular.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jButtonCalcular.setText("Calcular");
         jButtonCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,6 +51,7 @@ public class InsertarIP extends javax.swing.JFrame {
             }
         });
 
+        jSalir.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jSalir.setText("Salir");
         jSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,45 +59,31 @@ public class InsertarIP extends javax.swing.JFrame {
             }
         });
 
+        jIP.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelDir, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPrimerOcteto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jSegundoOcteto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTercerOcteto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jCuartoOcteto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addComponent(jMascara, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelDir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jIP, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDir)
-                    .addComponent(jPrimerOcteto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCuartoOcteto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSegundoOcteto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTercerOcteto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jMascara, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                    .addComponent(jLabelDir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jIP))
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCalcular)
                     .addComponent(jSalir))
@@ -118,16 +101,10 @@ public class InsertarIP extends javax.swing.JFrame {
     private void jButtonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularActionPerformed
         InformacionIP ven;
         IP dirIP;
-        Integer primerOcteto, segundoOcteto, tercerOcteto, cuartoOcteto, mascara;
-        
-        primerOcteto = (Integer) jPrimerOcteto.getSelectedItem();
-        segundoOcteto = (Integer) jSegundoOcteto.getSelectedItem();
-        tercerOcteto = (Integer) jTercerOcteto.getSelectedItem();
-        cuartoOcteto = (Integer) jCuartoOcteto.getSelectedItem();
-        mascara = (Integer) jMascara.getSelectedItem();
         
         try {
-            dirIP = new IP(primerOcteto, segundoOcteto, tercerOcteto, cuartoOcteto, mascara);
+            dirIP = new IP();
+            dirIP.setIp(jIP.getText());
             ven = new InformacionIP(dirIP);
                 
             this.setVisible(false);
@@ -137,41 +114,11 @@ public class InsertarIP extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonCalcularActionPerformed
 
-    private void rellenarComboBox(){
-        DefaultComboBoxModel modeloPrimerOcteto = new DefaultComboBoxModel();
-        DefaultComboBoxModel modeloSegundoOcteto = new DefaultComboBoxModel();
-        DefaultComboBoxModel modeloTercerOcteto = new DefaultComboBoxModel();
-        DefaultComboBoxModel modeloCuartoOcteto = new DefaultComboBoxModel();
-        DefaultComboBoxModel modeloMascara = new DefaultComboBoxModel();
-        
-        
-        for (int i = 0; i < 256; i++) {
-            modeloPrimerOcteto.addElement(i);
-            modeloSegundoOcteto.addElement(i);
-            modeloTercerOcteto.addElement(i);
-            modeloCuartoOcteto.addElement(i);
-            
-            
-            if (i < 33 && i > 0){
-                modeloMascara.addElement(i);
-            }
-        }
-        
-        jPrimerOcteto.setModel(modeloPrimerOcteto);
-        jSegundoOcteto.setModel(modeloSegundoOcteto);
-        jTercerOcteto.setModel(modeloTercerOcteto);
-        jCuartoOcteto.setModel(modeloCuartoOcteto);
-        jMascara.setModel(modeloMascara);
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCalcular;
-    private javax.swing.JComboBox<String> jCuartoOcteto;
+    private javax.swing.JTextField jIP;
     private javax.swing.JLabel jLabelDir;
-    private javax.swing.JComboBox<String> jMascara;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox<String> jPrimerOcteto;
     private javax.swing.JButton jSalir;
-    private javax.swing.JComboBox<String> jSegundoOcteto;
-    private javax.swing.JComboBox<String> jTercerOcteto;
     // End of variables declaration//GEN-END:variables
 }

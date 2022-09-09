@@ -78,10 +78,16 @@ public class IPTest {
                 ()->ip.setIp("456.168.1.1/12"));
         Exception ex2 = Assertions.assertThrows(Exception.class,
                 ()->ip.setIp("192.168.1.2/33"));
+        Exception ex3 = Assertions.assertThrows(Exception.class,
+                ()->ip.setIp("12"));
+        Exception ex4 = Assertions.assertThrows(Exception.class,
+                ()->ip.setIp("...."));
         
         // Probamos casos aleatorios.
         assertEquals("Ip no válida", ex1.getMessage());
         assertEquals("Ip no válida", ex2.getMessage());
+        assertEquals("Ip no válida", ex3.getMessage());
+        assertEquals("Ip no válida", ex4.getMessage());
         ip.setIp("192.168.1.3/31");
         assertEquals("192.168.1.3/31", ip.toString());
         ip.setIp("223.192.123.244/1");
