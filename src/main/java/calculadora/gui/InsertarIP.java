@@ -19,10 +19,12 @@ public class InsertarIP extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel = new javax.swing.JPanel();
         jLabelDir = new javax.swing.JLabel();
         jButtonCalcular = new javax.swing.JButton();
         jSalir = new javax.swing.JButton();
         jIP = new javax.swing.JTextField();
+        jSeparator = new javax.swing.JSeparator();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -40,54 +42,90 @@ public class InsertarIP extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(511, 160));
         setResizable(false);
 
-        jLabelDir.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        jPanel.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel.setForeground(new java.awt.Color(153, 153, 153));
+
+        jLabelDir.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        jLabelDir.setForeground(new java.awt.Color(51, 51, 51));
         jLabelDir.setText("Dirección IP:");
 
+        jButtonCalcular.setBackground(new java.awt.Color(51, 51, 51));
         jButtonCalcular.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        jButtonCalcular.setForeground(new java.awt.Color(204, 204, 204));
         jButtonCalcular.setText("Calcular");
+        jButtonCalcular.setBorderPainted(false);
+        jButtonCalcular.setFocusPainted(false);
         jButtonCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCalcularActionPerformed(evt);
             }
         });
 
+        jSalir.setBackground(new java.awt.Color(51, 51, 51));
         jSalir.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        jSalir.setForeground(new java.awt.Color(204, 204, 204));
         jSalir.setText("Salir");
+        jSalir.setBorderPainted(false);
+        jSalir.setFocusPainted(false);
         jSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSalirActionPerformed(evt);
             }
         });
 
-        jIP.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jIP.setBackground(new java.awt.Color(153, 153, 153));
+        jIP.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        jIP.setForeground(new java.awt.Color(102, 102, 103));
+        jIP.setBorder(null);
+        jIP.setCaretColor(new java.awt.Color(102, 102, 102));
+        jIP.setDisabledTextColor(new java.awt.Color(153, 153, 153));
+        jIP.setSelectedTextColor(new java.awt.Color(153, 153, 153));
+        jIP.setSelectionColor(new java.awt.Color(204, 204, 204));
+
+        jSeparator.setBackground(new java.awt.Color(51, 51, 51));
+        jSeparator.setForeground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
+        jPanel.setLayout(jPanelLayout);
+        jPanelLayout.setHorizontalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelDir)
+                    .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jIP, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
+        );
+        jPanelLayout.setVerticalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jIP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCalcular)
+                    .addComponent(jSalir))
+                .addGap(23, 23, 23))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelDir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jIP, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+            .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jIP))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCalcular)
-                    .addComponent(jSalir))
-                .addGap(28, 28, 28))
+            .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -118,7 +156,9 @@ public class InsertarIP extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCalcular;
     private javax.swing.JTextField jIP;
     private javax.swing.JLabel jLabelDir;
+    private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jSalir;
+    private javax.swing.JSeparator jSeparator;
     // End of variables declaration//GEN-END:variables
 }
