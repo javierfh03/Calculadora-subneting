@@ -75,7 +75,7 @@ public class InsertarIP extends javax.swing.JFrame {
 
         jIP.setBackground(new java.awt.Color(153, 153, 153));
         jIP.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
-        jIP.setForeground(new java.awt.Color(102, 102, 103));
+        jIP.setForeground(new java.awt.Color(69, 69, 69));
         jIP.setBorder(null);
         jIP.setCaretColor(new java.awt.Color(102, 102, 102));
         jIP.setDisabledTextColor(new java.awt.Color(153, 153, 153));

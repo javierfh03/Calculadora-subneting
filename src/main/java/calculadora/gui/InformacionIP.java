@@ -76,7 +76,7 @@ public class InformacionIP extends javax.swing.JFrame {
         jHostMax.setEditable(false);
         jHostMax.setBackground(new java.awt.Color(153, 153, 153));
         jHostMax.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jHostMax.setForeground(new java.awt.Color(102, 102, 103));
+        jHostMax.setForeground(new java.awt.Color(69, 69, 69));
         jHostMax.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jHostMax.setText(hostMax);
         jHostMax.setBorder(null);
@@ -94,7 +94,7 @@ public class InformacionIP extends javax.swing.JFrame {
         jPosicion.setEditable(false);
         jPosicion.setBackground(new java.awt.Color(153, 153, 153));
         jPosicion.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jPosicion.setForeground(new java.awt.Color(102, 102, 103));
+        jPosicion.setForeground(new java.awt.Color(69, 69, 69));
         jPosicion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPosicion.setText(pos);
         jPosicion.setBorder(null);
@@ -148,7 +148,7 @@ public class InformacionIP extends javax.swing.JFrame {
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(153, 153, 153));
         jTextField1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(102, 102, 103));
+        jTextField1.setForeground(new java.awt.Color(69, 69, 69));
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setText(direccion.getClase() + "");
         jTextField1.setBorder(null);
@@ -160,7 +160,7 @@ public class InformacionIP extends javax.swing.JFrame {
         jDirRed.setEditable(false);
         jDirRed.setBackground(new java.awt.Color(153, 153, 153));
         jDirRed.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jDirRed.setForeground(new java.awt.Color(102, 102, 103));
+        jDirRed.setForeground(new java.awt.Color(69, 69, 69));
         jDirRed.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jDirRed.setText(dirRed);
         jDirRed.setBorder(null);
@@ -172,7 +172,7 @@ public class InformacionIP extends javax.swing.JFrame {
         jDirBrod.setEditable(false);
         jDirBrod.setBackground(new java.awt.Color(153, 153, 153));
         jDirBrod.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jDirBrod.setForeground(new java.awt.Color(102, 102, 103));
+        jDirBrod.setForeground(new java.awt.Color(69, 69, 69));
         jDirBrod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jDirBrod.setText(dirBro);
         jDirBrod.setBorder(null);
@@ -184,7 +184,7 @@ public class InformacionIP extends javax.swing.JFrame {
         jCantHost.setEditable(false);
         jCantHost.setBackground(new java.awt.Color(153, 153, 153));
         jCantHost.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jCantHost.setForeground(new java.awt.Color(102, 102, 103));
+        jCantHost.setForeground(new java.awt.Color(69, 69, 69));
         jCantHost.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jCantHost.setText(cantHost + "");
         jCantHost.setBorder(null);
@@ -196,7 +196,7 @@ public class InformacionIP extends javax.swing.JFrame {
         jHostMin.setEditable(false);
         jHostMin.setBackground(new java.awt.Color(153, 153, 153));
         jHostMin.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jHostMin.setForeground(new java.awt.Color(102, 102, 103));
+        jHostMin.setForeground(new java.awt.Color(69, 69, 69));
         jHostMin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jHostMin.setText(hostMin);
         jHostMin.setBorder(null);
